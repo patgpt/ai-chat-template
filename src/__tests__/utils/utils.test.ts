@@ -1,7 +1,7 @@
 import { describe, expect, it } from "bun:test";
-import { cn } from "@/lib/utils";
 import { clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
+import { cn } from "@/lib/utils";
 
 describe("unit: utils", () => {
   describe("cn utility function", () => {
@@ -54,16 +54,13 @@ describe("unit: utils", () => {
       const size = "lg";
       const disabled = false;
 
-      const result = cn(
-        "btn",
-        {
-          "btn-primary": variant === "primary",
-          "btn-secondary": variant === "secondary",
-          "btn-lg": size === "lg",
-          "btn-sm": size === "sm",
-          "btn-disabled": disabled,
-        }
-      );
+      const result = cn("btn", {
+        "btn-primary": variant === "primary",
+        "btn-secondary": variant === "secondary",
+        "btn-lg": size === "lg",
+        "btn-sm": size === "sm",
+        "btn-disabled": disabled,
+      });
 
       expect(result).toBe("btn btn-primary btn-lg");
     });

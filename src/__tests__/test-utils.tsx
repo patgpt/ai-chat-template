@@ -1,12 +1,15 @@
-import { render, RenderOptions } from "@testing-library/react";
-import { ReactElement } from "react";
+import { type RenderOptions, render } from "@testing-library/react";
+import type { ReactElement } from "react";
 
 // Custom render function that includes providers
 interface CustomRenderOptions extends Omit<RenderOptions, "wrapper"> {
   // Add any additional providers here if needed
 }
 
-export function customRender(ui: ReactElement, options: CustomRenderOptions = {}) {
+export function customRender(
+  ui: ReactElement,
+  options: CustomRenderOptions = {},
+) {
   const { ...renderOptions } = options;
 
   function Wrapper({ children }: { children: React.ReactNode }) {
@@ -60,15 +63,20 @@ export const mockAIProviders = {
 };
 
 // Helper to wait for async operations
-export const waitForAsync = () => new Promise(resolve => setTimeout(resolve, 0));
+export const waitForAsync = () =>
+  new Promise((resolve) => setTimeout(resolve, 0));
 
 // Helper to create mock functions with typed return values
-export function createMockFn<T extends (...args: any[]) => any>(returnValue?: ReturnType<T>) {
+export function createMockFn<T extends (...args: any[]) => any>(
+  returnValue?: ReturnType<T>,
+) {
   return jest.fn().mockReturnValue(returnValue);
 }
 
 // Helper to create mock event handlers
-export const createMockEventHandler = <T = any>(handler?: (event: T) => void) => {
+export const createMockEventHandler = <T = any>(
+  handler?: (event: T) => void,
+) => {
   return jest.fn(handler);
 };
 
@@ -86,7 +94,7 @@ export const userEventHelpers = {
     // Simulate clearing an input
     const nativeInputValueSetter = Object.getOwnPropertyDescriptor(
       window.HTMLInputElement.prototype,
-      "value"
+      "value",
     )?.set;
     nativeInputValueSetter?.call(element, "");
     element.dispatchEvent(new Event("input", { bubbles: true }));
