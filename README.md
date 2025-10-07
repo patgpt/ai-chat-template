@@ -181,9 +181,15 @@ bun run start        # Start production server
 # Code Quality
 bun run lint         # Run Biome linter
 bun run format       # Format code with Biome
+bun run type-check   # TypeScript type checking
 
-# Type Generation
-bun run codegen      # Generate GraphQL types (if using)
+# Testing
+bun run test         # Run all tests
+bun run test:watch   # Run tests in watch mode
+bun run test:coverage # Run tests with coverage report
+bun run test:ci      # Run tests in CI mode (bail on first failure)
+bun run test:unit    # Run only unit tests
+bun run test:integration # Run only integration tests
 ```
 
 ### Key Technologies
@@ -204,6 +210,95 @@ bun run codegen      # Generate GraphQL types (if using)
 | `OPENAI_API_KEY` | OpenAI API key | Yes |
 | `GOOGLE_GENERATIVE_AI_API_KEY` | Google AI API key | No |
 | `DEEPSEEK_API_KEY` | DeepSeek API key | No |
+
+## 🧪 Testing
+
+The project uses Bun's built-in test runner for fast, Jest-compatible testing.
+
+### Test Structure
+
+```
+src/__tests__/
+├── setup.ts              # Test environment setup
+├── test-utils.tsx        # Testing utilities and helpers
+├── utils/                # Utility function tests
+│   └── utils.test.ts
+├── components/           # Component tests
+│   ├── Button.test.tsx
+│   └── Message.test.tsx
+└── hooks/               # Hook tests
+    └── use-mobile.test.ts
+```
+
+### Writing Tests
+
+Tests use Bun's test API which is compatible with Jest:
+
+```typescript
+import { describe, expect, it } from "bun:test";
+
+describe("My Feature", () => {
+  it("should work correctly", () => {
+    expect(1 + 1).toBe(2);
+  });
+});
+```
+
+### Test Utilities
+
+The project includes helpful test utilities in `src/__tests__/test-utils.tsx`:
+
+- **Custom render function** for React components
+- **Mock data factories** for consistent test data
+- **Assertion helpers** for common patterns
+- **DOM testing utilities**
+
+### Coverage
+
+Generate coverage reports:
+
+```bash
+bun run test:coverage
+```
+
+Coverage thresholds are configured in `bunfig.toml`:
+- Functions: 80%
+- Statements: 80%
+- Branches: 70%
+- Lines: 80%
+
+### Best Practices
+
+1. **Use descriptive test names** that explain what you're testing
+2. **Group related tests** with `describe` blocks
+3. **Test behavior, not implementation** details
+4. **Use test utilities** for consistent setup
+5. **Mock external dependencies** appropriately
+6. **Test edge cases** and error conditions
+
+### Example Test
+
+```typescript
+import { describe, expect, it } from "bun:test";
+import { render, screen } from "@/__tests__/test-utils";
+
+describe("unit: Button component", () => {
+  it("should render children correctly", () => {
+    render(<Button>Click me</Button>);
+    expect(screen.getByRole("button")).toHaveTextContent("Click me");
+  });
+
+  it("should handle click events", () => {
+    const handleClick = jest.fn();
+    render(<Button onClick={handleClick}>Click me</Button>);
+
+    // In Bun environment, use native DOM events
+    const button = screen.getByRole("button");
+    button.click();
+    expect(handleClick).toHaveBeenCalled();
+  });
+});
+```
 
 ## 🔧 Configuration
 
