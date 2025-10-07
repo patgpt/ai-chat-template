@@ -7,7 +7,7 @@ describe("unit: utils", () => {
   describe("cn utility function", () => {
     it("should merge class names correctly", () => {
       const result = cn("px-4", "py-2", "bg-blue-500");
-      expect(result).toBe("bg-blue-500 px-4 py-2");
+      expect(result).toBe("px-4 py-2 bg-blue-500");
     });
 
     it("should handle conditional classes", () => {
@@ -23,7 +23,7 @@ describe("unit: utils", () => {
 
     it("should merge conflicting Tailwind classes correctly", () => {
       const result = cn("px-4", "px-8", "bg-red-500", "bg-blue-500");
-      expect(result).toBe("bg-blue-500 px-8");
+      expect(result).toBe("px-8 bg-blue-500");
     });
 
     it("should handle empty input", () => {
@@ -33,12 +33,12 @@ describe("unit: utils", () => {
 
     it("should handle array input", () => {
       const result = cn(["px-4", "py-2"], "bg-blue-500");
-      expect(result).toBe("bg-blue-500 px-4 py-2");
+      expect(result).toBe("px-4 py-2 bg-blue-500");
     });
 
     it("should preserve non-conflicting classes", () => {
       const result = cn("text-lg", "font-bold", "text-center");
-      expect(result).toBe("font-bold text-center text-lg");
+      expect(result).toBe("text-lg font-bold text-center");
     });
   });
 
@@ -65,7 +65,7 @@ describe("unit: utils", () => {
         }
       );
 
-      expect(result).toBe("btn btn-lg btn-primary");
+      expect(result).toBe("btn btn-primary btn-lg");
     });
   });
 });

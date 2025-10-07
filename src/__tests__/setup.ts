@@ -6,10 +6,6 @@ const registrator = new GlobalRegistrator();
 
 // Clean up after tests
 afterEach(() => {
-  // Clear all timers
-  jest.clearAllTimers();
-  // Clear all mocks
-  jest.clearAllMocks();
   // Reset DOM
   document.body.innerHTML = "";
   document.head.innerHTML = "";
@@ -32,3 +28,20 @@ beforeEach(() => {
 afterEach(() => {
   console.error = originalConsoleError;
 });
+
+// Mock jest functions for compatibility with React Testing Library
+global.jest = {
+  fn: (fn?: (...args: any[]) => any) => {
+    const mockFn = (...args: any[]) => {
+      if (fn) return fn(...args);
+      return undefined;
+    };
+    mockFn.mockReturnValue = (value: any) => mockFn;
+    mockFn.mockImplementation = (fn: (...args: any[]) => any) => mockFn;
+    mockFn.mockResolvedValue = (value: any) => mockFn;
+    mockFn.mockRejectedValue = (value: any) => mockFn;
+    return mockFn;
+  },
+  clearAllMocks: () => {},
+  clearAllTimers: () => {},
+} as any;
