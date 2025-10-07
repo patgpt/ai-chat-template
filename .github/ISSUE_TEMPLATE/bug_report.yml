@@ -1,0 +1,102 @@
+name: 🐛 Bug Report
+description: Create a report to help us improve the RAG Template
+title: "[BUG]: "
+labels: ["bug", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this bug report! Please provide as much detail as possible to help us understand and reproduce the issue.
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Describe the bug
+      description: A clear and concise description of what the bug is.
+      placeholder: |
+        When I try to [describe what you were doing], I get [describe the unexpected behavior].
+
+        Expected: [what you expected to happen]
+        Actual: [what actually happened]
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps-to-reproduce
+    attributes:
+      label: Steps to reproduce
+      description: Steps to reproduce the behavior.
+      placeholder: |
+        1. Go to '...'
+        2. Click on '....'
+        3. Scroll down to '....'
+        4. See error
+      render: markdown
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected-behavior
+    attributes:
+      label: Expected behavior
+      description: A clear and concise description of what you expected to happen.
+      placeholder: I expected the chat to respond normally without errors.
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual-behavior
+    attributes:
+      label: Actual behavior
+      description: A clear and concise description of what actually happened.
+      placeholder: Instead, I got an error message saying "Failed to connect to API".
+    validations:
+      required: true
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Please provide details about your environment.
+      placeholder: |
+        - **OS**: [e.g. macOS 14.0, Windows 11, Ubuntu 22.04]
+        - **Node.js version**: [e.g. 18.17.0]
+        - **Package manager**: [e.g. Bun 1.0.0, npm 9.0.0, yarn 1.22.0]
+        - **Browser**: [e.g. Chrome 120, Firefox 119, Safari 17.0]
+        - **AI Provider**: [e.g. OpenAI GPT-4, Google Gemini, DeepSeek R1]
+      render: markdown
+    validations:
+      required: true
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional context
+      description: Add any other context about the problem here.
+      placeholder: |
+        - Error logs or stack traces
+        - Screenshots (if applicable)
+        - Related issues or discussions
+        - Workarounds you've tried
+
+  - type: textarea
+    id: possible-solution
+    attributes:
+      label: Possible solution
+      description: If you have a suggested fix or solution, please describe it here.
+      placeholder: I think the issue might be in the API route handler where...
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Checklist
+      description: Please verify that you've completed these steps before submitting.
+      options:
+        - label: I have searched the existing issues for similar reports
+          required: true
+        - label: I have provided all the required information above
+          required: true
+        - label: I have tested this with the latest version of the codebase
+          required: true
+        - label: I am willing to help with debugging or testing a fix
+          required: false

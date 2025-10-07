@@ -1,0 +1,80 @@
+name: ❓ General Question
+description: Ask a question about the RAG Template
+title: "[QUESTION]: "
+labels: ["question", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for asking a question! Please provide as much context as possible to help us give you the best answer.
+
+  - type: textarea
+    id: question
+    attributes:
+      label: What is your question?
+      description: Please describe what you'd like to know or understand better.
+      placeholder: |
+        I'm trying to understand [specific topic or concept], but I'm having trouble with [particular aspect].
+
+        Could you help me understand [specific question]?
+    validations:
+      required: true
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      description: What category does your question fall into?
+      options:
+        - Setup and Installation
+        - Configuration
+        - Development
+        - Deployment
+        - Troubleshooting
+        - Feature Usage
+        - API Reference
+        - Architecture
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional context
+      description: Provide any additional context that might help us answer your question.
+      placeholder: |
+        - What have you tried so far?
+        - What error messages are you seeing?
+        - What version of the codebase are you using?
+        - What is your specific use case?
+        - Are you following any particular tutorial or documentation?
+
+  - type: textarea
+    id: expected-help
+    attributes:
+      label: What kind of help are you looking for?
+      description: Let us know what type of response would be most helpful.
+      placeholder: |
+        I'd like to know:
+        - [ ] How to implement [specific feature]
+        - [ ] Why [something] isn't working as expected
+        - [ ] Best practices for [specific use case]
+        - [ ] Documentation or examples for [topic]
+        - [ ] Troubleshooting steps for [issue]
+        - [ ] Other (please specify)
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Before asking
+      description: Please verify that you've done these steps before submitting.
+      options:
+        - label: I have searched the existing documentation
+          required: true
+        - label: I have searched existing issues and discussions
+          required: true
+        - label: I have tried to solve this myself first
+          required: true
+        - label: My question is specific and clear
+          required: true

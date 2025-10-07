@@ -1,0 +1,54 @@
+[test]
+# Test configuration for Bun's test runner
+
+# Test discovery patterns
+# Files ending with .test.ts, .test.tsx, .spec.ts, .spec.tsx
+# or in __tests__ directories will be discovered automatically
+
+# Timeout for individual tests (in milliseconds)
+timeout = 5000
+
+# Run tests in random order for better test isolation
+randomize = true
+
+# Coverage settings (when using --coverage flag)
+[coverage]
+# Include all source files in coverage reports
+include = ["src/**/*"]
+
+# Exclude test files and config files from coverage
+exclude = [
+  "src/**/*.test.*",
+  "src/**/*.spec.*",
+  "**/__tests__/**",
+  "src/**/*.d.ts",
+  "src/**/index.ts",
+]
+
+# Set coverage thresholds
+thresholds = [
+  { name = "functions", value = 80 },
+  { name = "statements", value = 80 },
+  { name = "branches", value = 70 },
+  { name = "lines", value = 80 },
+]
+
+# Reporter settings
+[reporter]
+# Use the default reporter for development
+# Use junit for CI environments
+format = "default"
+
+# Test environment setup
+[test.env]
+# Set NODE_ENV for testing
+NODE_ENV = "test"
+
+# Test globals available in all test files
+[test.globals]
+# Add any global test utilities here if needed
+
+# JSX settings for tests
+[jsx]
+# Preserve JSX in test files
+preserve = true

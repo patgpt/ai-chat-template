@@ -1,36 +1,317 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# RAG Chatbot Template
 
-## Getting Started
+A production-ready starter template for building AI-powered RAG (Retrieval-Augmented Generation) chatbots using Next.js, AI SDK, and modern web technologies.
 
-First, run the development server:
+[![Next.js](https://img.shields.io/badge/Next.js-15.5.4-black)](https://nextjs.org/)
+[![AI SDK](https://img.shields.io/badge/AI%20SDK-5.0.60-blue)](https://sdk.vercel.ai/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-blue)](https://www.typescriptlang.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-4-38B2AC)](https://tailwindcss.com/)
+[![Bun](https://img.shields.io/badge/Bun-1.0+-FBF0DF)](https://bun.sh/)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## 🌟 Features
+
+### Core AI Capabilities
+- **Multi-Model Support**: OpenAI GPT-4o, Google Gemini, DeepSeek R1
+- **Streaming Responses**: Real-time text streaming for better UX
+- **Tool Integration**: Extensible tool system for RAG functionality
+- **Agent Framework**: Built-in agent patterns for complex workflows
+- **File Attachments**: Support for document uploads and processing
+- **Web Search Integration**: Optional web search for enhanced responses
+
+### Developer Experience
+- **TypeScript**: Full type safety throughout the application
+- **Modern React**: React 19 with latest hooks and patterns
+- **Component Library**: shadcn/ui for consistent, accessible UI
+- **Code Quality**: Biome for linting and formatting
+- **Package Manager**: Bun for fast installs and builds
+- **Hot Reload**: Turbopack for lightning-fast development
+
+### Production Ready
+- **Optimized Performance**: Built with Next.js 15 and React 19
+- **Responsive Design**: Mobile-first approach with Tailwind CSS
+- **Error Handling**: Comprehensive error boundaries and fallbacks
+- **Security**: Input validation and sanitization
+- **Scalable Architecture**: Modular design for easy extension
+
+## 🚀 Quick Start
+
+### Prerequisites
+- **Node.js 18+** or **Bun**
+- **Package Manager**: Bun (recommended) or npm/yarn
+
+### Installation
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/patgpt/rag-template.git
+   cd rag-template
+   ```
+
+2. **Install dependencies**
+   ```bash
+   bun install
+   ```
+
+3. **Set up environment variables**
+   ```bash
+   cp .env.example .env.local
+   ```
+
+   Add your API keys to `.env.local`:
+   ```env
+   # OpenAI API Key
+   OPENAI_API_KEY=your_openai_api_key_here
+
+   # Google AI API Key (optional)
+   GOOGLE_GENERATIVE_AI_API_KEY=your_google_api_key_here
+
+   # DeepSeek API Key (optional)
+   DEEPSEEK_API_KEY=your_deepseek_api_key_here
+   ```
+
+4. **Start development server**
+   ```bash
+   bun run dev
+   ```
+
+5. **Open your browser**
+   Navigate to [http://localhost:3001](http://localhost:3001) to see the chat interface.
+
+## 📁 Project Structure
+
+```
+rag-template/
+├── src/
+│   ├── ai/                    # AI-specific modules
+│   │   ├── agents/           # Agent implementations
+│   │   ├── embedding/        # Vector embeddings
+│   │   ├── mcp/             # Model Context Protocol
+│   │   ├── middleware/      # AI request middleware
+│   │   ├── models/          # Model configurations
+│   │   ├── prompts/         # Prompt templates
+│   │   ├── providers/       # AI provider integrations
+│   │   └── tools/           # Custom tools for RAG
+│   ├── app/
+│   │   ├── api/chat/        # Chat API endpoint
+│   │   └── page.tsx         # Main chat interface
+│   ├── components/
+│   │   ├── ai-elements/     # AI-specific UI components
+│   │   └── ui/              # Reusable UI components
+│   └── hooks/               # Custom React hooks
+├── public/                   # Static assets
+└── docs/                     # Documentation
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🎯 Usage Examples
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Basic Chat Interface
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The template includes a fully functional chat interface with:
+- Message history
+- Model selection
+- File attachment support
+- Web search toggle
+- Streaming responses
+- Copy and retry actions
 
-## Learn More
+### Custom AI Models
 
-To learn more about Next.js, take a look at the following resources:
+Add support for additional AI models:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```typescript
+// src/ai/models/custom.ts
+import { openai } from '@ai-sdk/openai';
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+export const customModel = openai('gpt-4-turbo', {
+  // Custom configuration
+});
+```
 
-## Deploy on Vercel
+### Building Custom Tools
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Create tools for RAG functionality:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```typescript
+// src/ai/tools/document-search.ts
+import { tool } from 'ai';
+import { z } from 'zod';
+
+export const searchDocuments = tool({
+  description: 'Search through uploaded documents',
+  parameters: z.object({
+    query: z.string(),
+    context: z.string().optional(),
+  }),
+  execute: async ({ query, context }) => {
+    // Implement document search logic
+    return { results: [] };
+  },
+});
+```
+
+### Agent Implementation
+
+Build complex AI agents with multiple tools:
+
+```typescript
+// src/ai/agents/research-agent.ts
+import { Agent } from 'ai';
+
+export const researchAgent = new Agent({
+  model: 'openai/gpt-4o',
+  tools: {
+    webSearch,
+    documentSearch,
+    summarize,
+  },
+  stopWhen: stepCountIs(10),
+});
+```
+
+## 🛠 Development
+
+### Available Scripts
+
+```bash
+# Development
+bun run dev          # Start development server with Turbopack
+bun run build        # Build for production
+bun run start        # Start production server
+
+# Code Quality
+bun run lint         # Run Biome linter
+bun run format       # Format code with Biome
+
+# Type Generation
+bun run codegen      # Generate GraphQL types (if using)
+```
+
+### Key Technologies
+
+- **Framework**: Next.js 15 with App Router
+- **Runtime**: React 19 with Server Components
+- **Language**: TypeScript 5
+- **Styling**: Tailwind CSS 4
+- **UI Components**: shadcn/ui + Radix UI
+- **AI SDK**: Vercel AI SDK v5
+- **Package Manager**: Bun
+- **Linting**: Biome
+
+### Environment Variables
+
+| Variable | Description | Required |
+|----------|-------------|----------|
+| `OPENAI_API_KEY` | OpenAI API key | Yes |
+| `GOOGLE_GENERATIVE_AI_API_KEY` | Google AI API key | No |
+| `DEEPSEEK_API_KEY` | DeepSeek API key | No |
+
+## 🔧 Configuration
+
+### AI Model Configuration
+
+Configure AI models in `src/ai/models/`:
+
+```typescript
+// src/ai/models/providers.ts
+export const models = [
+  {
+    name: 'GPT-4o',
+    value: 'openai/gpt-4o',
+    provider: 'openai',
+  },
+  {
+    name: 'Gemini Pro',
+    value: 'google/gemini-pro',
+    provider: 'google',
+  },
+  {
+    name: 'DeepSeek R1',
+    value: 'deepseek/deepseek-r1',
+    provider: 'deepseek',
+  },
+];
+```
+
+### Tool Configuration
+
+Define custom tools in `src/ai/tools/`:
+
+```typescript
+// src/ai/tools/index.ts
+export const availableTools = {
+  webSearch,
+  documentSearch,
+  codeExecution,
+  databaseQuery,
+};
+```
+
+## 🚢 Deployment
+
+### Vercel (Recommended)
+
+1. **Connect to Vercel**
+   ```bash
+   vercel --prod
+   ```
+
+2. **Set environment variables** in Vercel dashboard
+
+3. **Deploy**
+   ```bash
+   vercel --prod
+   ```
+
+### Other Platforms
+
+The template works with any Node.js hosting platform:
+
+- **Railway**
+- **Render**
+- **Fly.io**
+- **Docker** (see `docker-compose.yml`)
+
+## 🤝 Contributing
+
+We welcome contributions! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
+
+### Quick Start for Contributors
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Add tests if applicable
+5. Submit a pull request
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🙏 Acknowledgments
+
+- [Vercel AI SDK](https://sdk.vercel.ai/) - For the amazing AI tooling
+- [shadcn/ui](https://ui.shadcn.com/) - For the beautiful components
+- [Tailwind CSS](https://tailwindcss.com/) - For the utility-first styling
+- [Next.js](https://nextjs.org/) - For the React framework
+
+## 📞 Support
+
+- **GitHub Issues**: [Report bugs and request features](https://github.com/patgpt/rag-template/issues)
+- **GitHub**: [@patgpt](https://github.com/patgpt)
+- **LinkedIn**: [patgpt](https://linkedin.com/in/patgpt)
+- **X (Twitter)**: [@slopwhisperer](https://x.com/slopwhisperer)
+
+## 🗺 Roadmap
+
+- [ ] Vector database integration (Pinecone, Qdrant)
+- [ ] Advanced RAG patterns (re-ranking, hybrid search)
+- [ ] Multi-modal support (images, audio)
+- [ ] Advanced agent orchestration
+- [ ] Plugin system for custom tools
+- [ ] Real-time collaboration features
+- [ ] Advanced analytics and monitoring
+- [ ] Mobile app support (React Native)
+
+---
+
+**Made with ❤️ by [patgpt](https://github.com/patgpt)**

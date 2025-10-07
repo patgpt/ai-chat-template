@@ -1,0 +1,101 @@
+name: ✨ Feature Request
+description: Suggest an idea for the RAG Template
+title: "[FEATURE]: "
+labels: ["enhancement", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for suggesting a new feature! Please provide detailed information to help us understand your request and evaluate its feasibility.
+
+  - type: textarea
+    id: feature-description
+    attributes:
+      label: Feature description
+      description: A clear and concise description of the feature you'd like to see.
+      placeholder: |
+        I'd like to add [feature name] that would allow users to [describe what the feature would do].
+
+        This would solve the problem of [describe the current limitation or pain point].
+    validations:
+      required: true
+
+  - type: textarea
+    id: use-cases
+    attributes:
+      label: Use cases
+      description: Describe specific scenarios where this feature would be useful.
+      placeholder: |
+        1. **Scenario 1**: When a user [describes situation], they would be able to [describe benefit].
+        2. **Scenario 2**: For developers who [describes situation], this would [describe benefit].
+      render: markdown
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposed-solution
+    attributes:
+      label: Proposed solution
+      description: If you have ideas about how this feature could be implemented, please share them.
+      placeholder: |
+        I think this could be implemented by:
+
+        1. Adding a new [component/configuration/endpoint] that...
+        2. Modifying the existing [component/API] to support...
+        3. Integrating with [external service/library] to provide...
+
+        The implementation would involve changes to:
+        - [List affected files or components]
+    validations:
+      required: false
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Have you considered any alternative solutions or workarounds?
+      placeholder: |
+        I've also considered [alternative approach 1], but it would [explain why it's not ideal].
+
+        Another option would be [alternative approach 2], but it has [drawbacks/limitations].
+    validations:
+      required: false
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional context
+      description: Add any other context, screenshots, or examples that might help.
+      placeholder: |
+        - Links to similar features in other projects
+        - Mockups or wireframes (if applicable)
+        - Research or articles that inspired this feature
+        - Performance or security considerations
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      description: How important is this feature to you?
+      options:
+        - Low (nice to have)
+        - Medium (would be useful)
+        - High (important for my use case)
+        - Critical (blocking my adoption of the project)
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Checklist
+      description: Please verify that you've completed these steps before submitting.
+      options:
+        - label: I have searched the existing issues for similar feature requests
+          required: true
+        - label: I have provided a clear description and use cases
+          required: true
+        - label: I understand that this is a suggestion and may not be implemented
+          required: true
+        - label: I am willing to help implement this feature if accepted
+          required: false

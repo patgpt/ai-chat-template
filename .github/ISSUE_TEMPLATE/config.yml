@@ -1,0 +1,14 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 📖 Documentation
+    url: https://github.com/patgpt/rag-template#readme
+    about: Check the README for getting started and usage guides
+  - name: 💬 Discussions
+    url: https://github.com/patgpt/rag-template/discussions
+    about: Ask questions and discuss ideas in GitHub Discussions
+  - name: 🐛 Bug Reports & Feature Requests
+    url: https://github.com/patgpt/rag-template/issues/new/choose
+    about: Use issue templates for structured bug reports and feature requests
+  - name: 🔒 Security Issues
+    url: mailto:patgpt@protonmail.com
+    about: Report security vulnerabilities privately via email
