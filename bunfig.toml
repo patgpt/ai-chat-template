@@ -1,6 +1,9 @@
 [test]
 # Test configuration for Bun's test runner
 
+# Setup file to run before tests
+setup = "src/__tests__/setup.ts"
+
 # Test discovery patterns
 # Files ending with .test.ts, .test.tsx, .spec.ts, .spec.tsx
 # or in __tests__ directories will be discovered automatically
